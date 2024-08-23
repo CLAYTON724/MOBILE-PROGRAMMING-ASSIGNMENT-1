@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Military Registration Form</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+  }
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script>
+  
+  const setBackground = (url) => {
+    document.body.style.backgroundImage = `url(${url})`;
+};
+  setBackground('img1.jpg');
+
+
+
+ 
+  const form = document.createElement('form');
+  form.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';  
+  form.style.padding = '20px';
+  form.style.borderRadius = '10px';
+  form.style.width = '300px';
+  form.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.1)';
+
+  
+  const firstName = document.createElement('input');
+  firstName.type = 'text';
+  firstName.placeholder = 'First Name';
+  firstName.name = 'firstName';
+  
+  const lastName = document.createElement('input');
+  lastName.type = 'text';
+  lastName.placeholder = 'Last Name';
+  lastName.name = 'lastName';
+  
+  const email = document.createElement('input');
+  email.type = 'email';
+  email.placeholder = 'Email Address';
+  email.name = 'email';
+
+   
+  const emailWarning = document.createElement('span');
+  emailWarning.style.color = 'red';
+  emailWarning.style.display = 'none';
+  emailWarning.textContent = 'Invalid email address!';
+
+  email.addEventListener('input', function() {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(email.value)) {
+      emailWarning.style.display = 'inline';
+    } else {
+      emailWarning.style.display = 'none';
+    }
+  });
+
+  const password = document.createElement('input');
+  password.type = 'password';
+  password.placeholder = 'Password';
+  password.name = 'password';
+
+  const confirmPassword = document.createElement('input');
+  confirmPassword.type = 'password';
+  confirmPassword.placeholder = 'Confirm Password';
+  confirmPassword.name = 'confirmPassword';
+
+   
+  const loginButton = document.createElement('button');
+  loginButton.type = 'button';
+  loginButton.textContent = 'Log In';
+
+   
+  const message = document.createElement('span');
+  message.style.color = 'green';
+  message.style.display = 'none';
+
+   
+  loginButton.addEventListener('click', function() {
+    if (!firstName.value || !lastName.value) {
+      message.style.color = 'red';
+      message.textContent = 'Please enter your first name and last name.';
+      message.style.display = 'block';
+    } else if (emailWarning.style.display === 'inline') {
+      message.style.color = 'red';
+      message.textContent = 'Invalid email address!';
+      message.style.display = 'block';
+    } else if (password.value !== confirmPassword.value || !password.value) {
+      message.style.color = 'red';
+      message.textContent = 'Passwords do not match or are empty.';
+      message.style.display = 'block';
+    } else {
+      message.style.color = 'green';
+      message.textContent = 'Login successful! Welcome to duty, Commander';
+      message.style.display = 'block';
+    }
+  });
+
+   
+  form.appendChild(firstName);
+  form.appendChild(document.createElement('br'));
+  form.appendChild(lastName);
+  form.appendChild(document.createElement('br'));
+  form.appendChild(email);
+  form.appendChild(emailWarning);
+  form.appendChild(document.createElement('br'));
+  form.appendChild(password);
+  form.appendChild(document.createElement('br'));
+  form.appendChild(confirmPassword);
+  form.appendChild(document.createElement('br'));
+  form.appendChild(loginButton);
+  form.appendChild(document.createElement('br'));
+  form.appendChild(message);
+
+   
+  document.getElementById('app').appendChild(form);
+</script>
+
+</body>
+</html>
